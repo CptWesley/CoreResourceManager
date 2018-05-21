@@ -35,6 +35,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void GetNamesTest()
         {
+            Assert.Single(Resources.GetNames());
             Assert.Contains("demo.txt", Resources.GetNames());
         }
     }

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using CoreResourceManager.Exceptions;
 
@@ -28,15 +30,13 @@ namespace CoreResourceManager
         public static string[] GetNames()
         {
             Assembly assembly = Assembly.GetCallingAssembly();
-            string assemblyName = assembly.GetName().Name;
             string[] names = assembly.GetManifestResourceNames();
+            string head = $"{assembly.GetName().Name}.Resources.";
 
-            for (int i = 0; i < names.Length; ++i)
-            {
-                names[i] = names[i].Replace($"{assemblyName}.Resources.", string.Empty);
-            }
-
-            return names;
+            IEnumerable<string> resources = names.Where(
+                x => x.Length > head.Length &&
+                x.Substring(0, head.Length) == head);
+            return resources.Select(x => x.Replace(head, string.Empty)).ToArray();
         }
 
         /// <summary>
