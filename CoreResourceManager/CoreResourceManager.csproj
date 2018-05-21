@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Wesley Baartman</Authors>
+    <PackageProjectUrl>https://github.com/CptWesley/CoreResourceManager</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CptWesley/CoreResourceManager</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/CptWesley/CoreResourceManager/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Simplifies managing embedded resources in .NET Core projects.</Description>
+    <PackageTags>core resource managing</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
