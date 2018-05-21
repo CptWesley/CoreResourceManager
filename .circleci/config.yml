@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Restore
+          name: Dependencies
           command: dotnet restore
       - run:
           name: Tests
