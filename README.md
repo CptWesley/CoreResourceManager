@@ -1,5 +1,5 @@
 ![CircleCI](https://circleci.com/gh/CptWesley/CoreResourceManager.svg?style=shield)
-![BCH compliance](https://bettercodehub.com/edge/badge/CptWesley/CoreResourceManager?branch=master)
+![BetterCodeHub](https://bettercodehub.com/edge/badge/CptWesley/CoreResourceManager?branch=master)
 
 # CoreResourceManager
 Simplifies dealing with embedded resources in .NET core projects.
