@@ -18,8 +18,20 @@ namespace CoreResourceManager
         public static Stream Get(string name)
         {
             Assembly assembly = Assembly.GetCallingAssembly();
-            Stream result = assembly.GetManifestResourceStream(name);
+            return GetStream(assembly, name);
+        }
 
+        /// <summary>
+        /// Gets stream of the resource with a certain name in an assembly.
+        /// </summary>
+        /// <param name="assembly">Name of the resource to retrieve.</param>
+        /// <param name="name">Name of the resource to retrieve the stream for.</param>
+        /// <returns>The stream to the resource.</returns>
+        /// <exception cref="ResourceDoesNotExistException">Thrown when a resource does not exist.</exception>
+        private static Stream GetStream(Assembly assembly, string name)
+        {
+            string assemblyName = assembly.GetName().Name;
+            Stream result = assembly.GetManifestResourceStream($"{assemblyName}.Resources.{name}");
             if (result == null)
             {
                 throw new ResourceDoesNotExistException();
