@@ -5,12 +5,3 @@ comment:
   require_base: no        # [yes :: must have a base report to post]
   require_head: yes       # [yes :: must have a head report to post]
   branches: null
-
-
-  flags:
-    unittest:
-      paths:
-        - CoreResourceManager.Tests/src/
-    paramtest:
-      paths:
-        - CoreResourceManager.Tests/src/
