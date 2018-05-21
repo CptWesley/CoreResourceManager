@@ -28,5 +28,14 @@ namespace CoreResourceManager.Tests
         {
             Assert.Throws<ResourceDoesNotExistException>(() => Resources.Get("2fw464"));
         }
+
+        /// <summary>
+        /// Checks that the names of the resources get returned correctly.
+        /// </summary>
+        [Fact]
+        public static void GetNamesTest()
+        {
+            Assert.Contains("demo.txt", Resources.GetNames());
+        }
     }
 }

@@ -22,6 +22,24 @@ namespace CoreResourceManager
         }
 
         /// <summary>
+        /// Gets the names of all available resources.
+        /// </summary>
+        /// <returns>An array with the names of all found resources.</returns>
+        public static string[] GetNames()
+        {
+            Assembly assembly = Assembly.GetCallingAssembly();
+            string assemblyName = assembly.GetName().Name;
+            string[] names = assembly.GetManifestResourceNames();
+
+            for (int i = 0; i < names.Length; ++i)
+            {
+                names[i] = names[i].Replace($"{assemblyName}.Resources.", string.Empty);
+            }
+
+            return names;
+        }
+
+        /// <summary>
         /// Gets stream of the resource with a certain name in an assembly.
         /// </summary>
         /// <param name="assembly">Name of the resource to retrieve.</param>
