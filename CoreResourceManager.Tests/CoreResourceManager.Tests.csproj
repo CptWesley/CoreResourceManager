@@ -34,8 +34,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <EmbeddedResource Include="Resources/*" />
-	<EmbeddedResource Include="Nonresources/*" />
+    <EmbeddedResource Include="Resources/**" />
+	<EmbeddedResource Include="Nonresources/**" />
   </ItemGroup>
 
 </Project>
