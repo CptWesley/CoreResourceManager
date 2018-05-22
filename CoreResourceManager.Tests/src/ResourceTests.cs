@@ -5,9 +5,9 @@ using Xunit;
 namespace CoreResourceManager.Tests
 {
     /// <summary>
-    /// Test class for the <see cref="Resources"/> class.
+    /// Test class for the <see cref="Resource"/> class.
     /// </summary>
-    public static class ResourcesTests
+    public static class ResourceTests
     {
         /// <summary>
         /// Checks that the resource is retrieved correctly.
@@ -15,7 +15,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void GetStreamTest()
         {
-            Stream stream = Resources.Get("demo.txt");
+            Stream stream = Resource.Get("demo.txt");
             StreamReader reader = new StreamReader(stream);
             Assert.Equal("hello world", reader.ReadToEnd());
         }
@@ -26,7 +26,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void InvalidResourceTest()
         {
-            Assert.Throws<ResourceDoesNotExistException>(() => Resources.Get("2fw464"));
+            Assert.Throws<ResourceDoesNotExistException>(() => Resource.Get("2fw464"));
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void GetNamesTest()
         {
-            Assert.Single(Resources.GetNames());
-            Assert.Contains("demo.txt", Resources.GetNames());
+            Assert.Single(Resource.GetNames());
+            Assert.Contains("demo.txt", Resource.GetNames());
         }
     }
 }

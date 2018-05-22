@@ -9,7 +9,7 @@ namespace CoreResourceManager
     /// <summary>
     /// Static class used to retrieve project resources.
     /// </summary>
-    public static class Resources
+    public static class Resource
     {
         /// <summary>
         /// Gets stream of the resource with a certain name.
