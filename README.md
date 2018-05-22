@@ -4,3 +4,15 @@
 
 # CoreResourceManager
 Simplifies dealing with embedded resources in .NET core projects.
+
+#### Prerequisites:
+- Application supporting .NET Standard.
+
+#### Usage:
+- Get the [nuget](https://www.nuget.org/packages/CoreResourceManager/).
+- Add the following to your `.csproj`:
+```
+<ItemGroup>
+  <EmbeddedResource Include="Resources/**" />
+</ItemGroup>
+```
