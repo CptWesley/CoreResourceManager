@@ -19,11 +19,7 @@ namespace CoreResourceManager
         /// <returns>The stream to the resource.</returns>
         /// <exception cref="ResourceDoesNotExistException">Thrown when a resource does not exist.</exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static Stream Get(string name)
-        {
-            Assembly assembly = Assembly.GetCallingAssembly();
-            return GetStream(assembly, name);
-        }
+        public static Stream Get(string name) => GetStream(Assembly.GetCallingAssembly(), name);
 
         /// <summary>
         /// Gets the names of all available resources.
