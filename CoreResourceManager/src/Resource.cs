@@ -65,7 +65,7 @@ namespace CoreResourceManager
         private static string[] GetNames(Assembly assembly, string path)
         {
             string[] names = assembly.GetManifestResourceNames();
-            string head = $"{assembly.GetName().Name}.Resources.";
+            string head = $"{assembly.GetName().Name}.Resources.{path}";
 
             if (!string.IsNullOrEmpty(path))
             {
