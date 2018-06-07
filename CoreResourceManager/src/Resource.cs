@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -72,9 +73,7 @@ namespace CoreResourceManager
                 head += '.';
             }
 
-            IEnumerable<string> resources = names.Where(
-                x => x.Length > head.Length &&
-                x.Substring(0, head.Length) == head);
+            IEnumerable<string> resources = names.Where(x => x.StartsWith(head, true, CultureInfo.InvariantCulture));
             return resources.Select(x => x.Replace(head, string.Empty)).ToArray();
         }
 
