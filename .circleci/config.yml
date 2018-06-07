@@ -13,4 +13,4 @@ jobs:
           command: dotnet test CoreResourceManager.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=bin
       - run:
           name: Codecov
-          command: bash <(curl -s https://codecov.io/bash) -f "CoreResourceManager.Tests/bin/coverage.xml" -t 51e8b7c7-7fb4-4bdb-9ebd-ce77abbc39da
+          command: bash <(curl -s https://codecov.io/bash) -f "CoreResourceManager.Tests/bin/coverage.xml" -t $CODECOV_KEY
