@@ -30,17 +30,15 @@ namespace CoreResourceManager
         /// </summary>
         /// <returns>An array with the names of all found resources.</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string[] GetNames()
-        {
-            Assembly assembly = Assembly.GetCallingAssembly();
-            string[] names = assembly.GetManifestResourceNames();
-            string head = $"{assembly.GetName().Name}.Resources.";
+        public static string[] GetNames() => GetNames(Assembly.GetCallingAssembly(), string.Empty);
 
-            IEnumerable<string> resources = names.Where(
-                x => x.Length > head.Length &&
-                x.Substring(0, head.Length) == head);
-            return resources.Select(x => x.Replace(head, string.Empty)).ToArray();
-        }
+        /// <summary>
+        /// Gets the names of all available resources in a subfolder.
+        /// </summary>
+        /// <param name="path">Path of the resource subfolder to check in.</param>
+        /// <returns>An array with the names of all found resources.</returns>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static string[] GetNames(string path) => GetNames(Assembly.GetCallingAssembly(), path);
 
         /// <summary>
         /// Gets stream of the resource with a certain name in an assembly.
@@ -59,6 +57,29 @@ namespace CoreResourceManager
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the names of all available resources at a certain path
+        /// in a specified assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly to look in.</param>
+        /// <param name="path">The path to look in.</param>
+        /// <returns>An array of paths to found resources.</returns>
+        private static string[] GetNames(Assembly assembly, string path)
+        {
+            string[] names = assembly.GetManifestResourceNames();
+            string head = $"{assembly.GetName().Name}.Resources.";
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                head += '.';
+            }
+
+            IEnumerable<string> resources = names.Where(
+                x => x.Length > head.Length &&
+                x.Substring(0, head.Length) == head);
+            return resources.Select(x => x.Replace(head, string.Empty)).ToArray();
         }
     }
 }
