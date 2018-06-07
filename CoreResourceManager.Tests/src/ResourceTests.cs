@@ -35,8 +35,54 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void GetNamesTest()
         {
-            Assert.Single(Resource.GetNames());
-            Assert.Contains("demo.txt", Resource.GetNames());
+            string[] res = Resource.GetNames();
+            Assert.Equal(3, res.Length);
+            Assert.Contains("demo.txt", res);
+            Assert.Contains("Sub.demo1.txt", res);
+            Assert.Contains("Sub.demo2.txt", res);
+        }
+
+        /// <summary>
+        /// Checks that sub folder items are found correctly.
+        /// </summary>
+        [Fact]
+        public static void GetNamesSubTest()
+        {
+            string[] res = Resource.GetNames("Sub");
+            Assert.Equal(2, res.Length);
+            Assert.DoesNotContain("demo.txt", res);
+            Assert.Contains("Sub.demo1.txt", res);
+            Assert.Contains("Sub.demo2.txt", res);
+        }
+
+        /// <summary>
+        /// Checks if the paths are correctly trimmed.
+        /// </summary>
+        [Fact]
+        public static void TrimTest()
+        {
+            string[] res = Resource.GetNames(".Sub.");
+            Assert.Equal(2, res.Length);
+        }
+
+        /// <summary>
+        /// Checks if the paths with forward slashes are correctly found.
+        /// </summary>
+        [Fact]
+        public static void ForwardSlashTest()
+        {
+            string[] res = Resource.GetNames("/Sub");
+            Assert.Equal(2, res.Length);
+        }
+
+        /// <summary>
+        /// Checks if the paths with backward slashes are correctly found.
+        /// </summary>
+        [Fact]
+        public static void BackwardSlashTest()
+        {
+            string[] res = Resource.GetNames("\\Sub");
+            Assert.Equal(2, res.Length);
         }
     }
 }

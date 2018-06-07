@@ -37,5 +37,10 @@
     <EmbeddedResource Include="Resources/**" />
 	<EmbeddedResource Include="Nonresources/**" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Resources\Sub\demo1.txt" />
+    <None Remove="Resources\Sub\demo2.txt" />
+  </ItemGroup>
 
 </Project>
