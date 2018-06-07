@@ -19,7 +19,7 @@ namespace CoreResourceManager
         /// <returns>The stream to the resource.</returns>
         /// <exception cref="ResourceDoesNotExistException">Thrown when a resource does not exist.</exception>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static Stream Get(string name) => GetStream(Assembly.GetCallingAssembly(), name);
+        public static Stream Get(string name) => GetStream(Assembly.GetCallingAssembly(), FixPath(name));
 
         /// <summary>
         /// Gets the names of all available resources.
@@ -34,7 +34,7 @@ namespace CoreResourceManager
         /// <param name="path">Path of the resource subfolder to check in.</param>
         /// <returns>An array with the names of all found resources.</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string[] GetNames(string path) => GetNames(Assembly.GetCallingAssembly(), path);
+        public static string[] GetNames(string path) => GetNames(Assembly.GetCallingAssembly(), FixPath(path));
 
         /// <summary>
         /// Gets stream of the resource with a certain name in an assembly.
@@ -77,5 +77,12 @@ namespace CoreResourceManager
                 x.Substring(0, head.Length) == head);
             return resources.Select(x => x.Replace(head, string.Empty)).ToArray();
         }
+
+        /// <summary>
+        /// Fixes a path to a resource or subfolder.
+        /// </summary>
+        /// <param name="path">The path to fix.</param>
+        /// <returns>A version of the path with general directory characters replaced with '.'.</returns>
+        private static string FixPath(string path) => path.Replace('/', '.').Replace('\\', '.').Trim('.');
     }
 }
