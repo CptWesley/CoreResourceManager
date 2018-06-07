@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using CoreResourceManager.Exceptions;
 
 namespace CoreResourceManager
@@ -17,6 +18,7 @@ namespace CoreResourceManager
         /// <param name="name">Name of the resource to retrieve.</param>
         /// <returns>The stream to the resource.</returns>
         /// <exception cref="ResourceDoesNotExistException">Thrown when a resource does not exist.</exception>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static Stream Get(string name)
         {
             Assembly assembly = Assembly.GetCallingAssembly();
@@ -27,6 +29,7 @@ namespace CoreResourceManager
         /// Gets the names of all available resources.
         /// </summary>
         /// <returns>An array with the names of all found resources.</returns>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static string[] GetNames()
         {
             Assembly assembly = Assembly.GetCallingAssembly();
