@@ -66,14 +66,15 @@ namespace CoreResourceManager
         private static string[] GetNames(Assembly assembly, string path)
         {
             string[] names = assembly.GetManifestResourceNames();
-            string head = $"{assembly.GetName().Name}.Resources.{path}";
+            string head = $"{assembly.GetName().Name}.Resources.";
+            string fullPath = $"{head}{path}";
 
             if (!string.IsNullOrEmpty(path))
             {
-                head += '.';
+                fullPath += '.';
             }
 
-            IEnumerable<string> resources = names.Where(x => x.StartsWith(head, true, CultureInfo.InvariantCulture));
+            IEnumerable<string> resources = names.Where(x => x.StartsWith(fullPath, true, CultureInfo.InvariantCulture));
             return resources.Select(x => x.Replace(head, string.Empty)).ToArray();
         }
 
