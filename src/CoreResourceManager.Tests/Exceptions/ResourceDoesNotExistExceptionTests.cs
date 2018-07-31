@@ -3,6 +3,8 @@ using CoreResourceManager.Exceptions;
 using Moq;
 using Xunit;
 
+using static AssertNet.Xunit.Assertions;
+
 namespace Librio.Api.Detector.Test.Exceptions
 {
     /// <summary>
@@ -16,7 +18,7 @@ namespace Librio.Api.Detector.Test.Exceptions
         [Fact]
         public static void MessagedConstructorTest()
         {
-            Assert.Equal("bla", new ResourceDoesNotExistException("bla").Message);
+            AssertThat(new ResourceDoesNotExistException("bla")).WithMessage("bla");
         }
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace Librio.Api.Detector.Test.Exceptions
         public static void InnerExceptionConstructorTest()
         {
             Exception e = new Mock<Exception>().Object;
-            Assert.Same(e, new ResourceDoesNotExistException(string.Empty, e).InnerException);
+            AssertThat(new ResourceDoesNotExistException(string.Empty, e).InnerException).IsSameAs(e);
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace Librio.Api.Detector.Test.Exceptions
         [Fact]
         public static void NormalThrownTest()
         {
-            Assert.ThrowsAsync<ResourceDoesNotExistException>(() => throw new ResourceDoesNotExistException());
+            AssertThat(() => throw new ResourceDoesNotExistException()).ThrowsExactlyException<ResourceDoesNotExistException>();
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Librio.Api.Detector.Test.Exceptions
         [Fact]
         public static void MessageThrownTest()
         {
-            Assert.ThrowsAsync<ResourceDoesNotExistException>(() => throw new ResourceDoesNotExistException(string.Empty));
+            AssertThat(() => throw new ResourceDoesNotExistException(string.Empty)).ThrowsExactlyException<ResourceDoesNotExistException>();
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace Librio.Api.Detector.Test.Exceptions
         [Fact]
         public static void InnerThrownTest()
         {
-            Assert.ThrowsAsync<ResourceDoesNotExistException>(() => throw new ResourceDoesNotExistException(string.Empty, null));
+            AssertThat(() => throw new ResourceDoesNotExistException(string.Empty, null)).ThrowsExactlyException<ResourceDoesNotExistException>();
         }
     }
 }

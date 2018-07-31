@@ -2,6 +2,8 @@
 using CoreResourceManager.Exceptions;
 using Xunit;
 
+using static AssertNet.Xunit.Assertions;
+
 namespace CoreResourceManager.Tests
 {
     /// <summary>
@@ -17,7 +19,7 @@ namespace CoreResourceManager.Tests
         {
             Stream stream = Resource.Get("demo.txt");
             StreamReader reader = new StreamReader(stream);
-            Assert.Equal("hello world", reader.ReadToEnd());
+            AssertThat(reader.ReadToEnd()).IsEqualTo("hello world");
         }
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void InvalidResourceTest()
         {
-            Assert.Throws<ResourceDoesNotExistException>(() => Resource.Get("2fw464"));
+            AssertThat(() => Resource.Get("2fw464")).ThrowsExactlyException<ResourceDoesNotExistException>();
         }
 
         /// <summary>
@@ -36,10 +38,10 @@ namespace CoreResourceManager.Tests
         public static void GetNamesTest()
         {
             string[] res = Resource.GetNames();
-            Assert.Equal(3, res.Length);
-            Assert.Contains("demo.txt", res);
-            Assert.Contains("Sub.demo1.txt", res);
-            Assert.Contains("Sub.demo2.txt", res);
+            AssertThat(res).HasSize(3);
+            AssertThat(res).Contains("demo.txt");
+            AssertThat(res).Contains("Sub.demo1.txt");
+            AssertThat(res).Contains("Sub.demo2.txt");
         }
 
         /// <summary>
@@ -49,10 +51,10 @@ namespace CoreResourceManager.Tests
         public static void GetNamesSubTest()
         {
             string[] res = Resource.GetNames("Sub");
-            Assert.Equal(2, res.Length);
-            Assert.DoesNotContain("demo.txt", res);
-            Assert.Contains("Sub.demo1.txt", res);
-            Assert.Contains("Sub.demo2.txt", res);
+            AssertThat(res).HasSize(2);
+            AssertThat(res).DoesNotContain("demo.txt");
+            AssertThat(res).Contains("Sub.demo1.txt");
+            AssertThat(res).Contains("Sub.demo2.txt");
         }
 
         /// <summary>
@@ -61,8 +63,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void TrimTest()
         {
-            string[] res = Resource.GetNames(".Sub.");
-            Assert.Equal(2, res.Length);
+            AssertThat(Resource.GetNames(".Sub.")).HasSize(2);
         }
 
         /// <summary>
@@ -71,8 +72,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void ForwardSlashTest()
         {
-            string[] res = Resource.GetNames("/Sub");
-            Assert.Equal(2, res.Length);
+            AssertThat(Resource.GetNames("/Sub")).HasSize(2);
         }
 
         /// <summary>
@@ -81,8 +81,7 @@ namespace CoreResourceManager.Tests
         [Fact]
         public static void BackwardSlashTest()
         {
-            string[] res = Resource.GetNames("\\Sub");
-            Assert.Equal(2, res.Length);
+            AssertThat(Resource.GetNames("\\Sub")).HasSize(2);
         }
     }
 }
